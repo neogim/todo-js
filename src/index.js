@@ -19,7 +19,13 @@ const onClickAdd = () => {
     //押された削除ボタンの親タグ（div)を未完了リストから削除
     deleteFromIncompleteList(completeButton.parentNode);
 
-    //？？？？上で消しているのに、下でaddTargetで取れる理由がわからない。
+    //Q.上で消しているのに、下でaddTargetで取れる理由がわからない。
+    /**
+     * A.addEventListenerはcompleteButtonが生成された時に割り当てられるため、
+     * その時のcompleteButtonが処理対象となります。
+     * よって処理内で先に削除をしていても、その後completeButtonを扱うことができます。
+     * console.log()で状態を確認すると分かりやすいかと思います
+     */
 
     //完了リストに追加する要素
     //親要素を取得する
@@ -42,7 +48,7 @@ const onClickAdd = () => {
     addTarget.appendChild(backbutton);
 
     //完了リストに追加
-    document.getElementById("complete-list").appendChild(div);
+    document.getElementById("complete-list").appendChild(addTarget);
   });
 
   //button(削除)タグ生成
